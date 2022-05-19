@@ -1,7 +1,7 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-[INDEX](/src/index.html)
+[INDEX](/public/index.html)
 
 ## Available Scripts
 
