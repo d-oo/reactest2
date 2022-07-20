@@ -1,25 +1,16 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Detail from "./routes/Detail";
-import Home from "./routes/Home";
+import { useState } from "react";
 
 function App() {
+  const [blabla, setBlabla] = useState("");
   return (
-    <Router>
-      <Switch>
-        <Route path="/hello">
-          <h1>Hello</h1>
-        </Route>
-        <Route path="/movie/:id">
-          <Detail />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
-    </Router>
+    <div>
+      <input
+        type="text"
+        value={blabla}
+        onChange={(event) => setBlabla(event.target.value)}
+      />
+      {blabla}
+    </div>
   );
 }
-//COMMITTED!!
-//SECOND!!
-//third
 export default App;

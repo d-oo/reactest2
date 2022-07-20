@@ -1,32 +1,31 @@
 import { useState, useEffect } from "react";
-import Movie from "../components/Movie";
+import styles from "./Home.module.css";
 
-function Home() {
-  const [loading, setLoading] = useState(true);
-  const [movies, setMovies] = useState([]);
-  const getMovies = async () => {
-    const json = await (
-      await fetch(
-        `https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year`
-      )
-    ).json();
-    setMovies(json.data.movies);
-    setLoading(false);
-  };
+function Home({ children, setHandleFunction, handleFunction }) {
+  const [showModal, setShowModal] = useState(false);
+  const [showAni, setShowAni] = useState(false);
+
   useEffect(() => {
-    getMovies();
-  }, []);
+    console.log("A");
+    const handleShowModal = () => {
+      if (!showAni) {
+        setShowModal(true);
+        setTimeout(() => setShowAni(true), 0);
+      } else {
+        setShowAni(false);
+        setTimeout(() => setShowModal(false), 500);
+      }
+    };
+    setHandleFunction(() => handleShowModal);
+  }, [setHandleFunction, showAni]);
   return (
-    <div>
-      {loading ? (
-        <h1>Loading...</h1>
-      ) : (
-        <div>
-          {movies.map((movie) => (
-            <Movie key={movie.id} bool={true} id={movie.id} movie={movie} />
-          ))}
+    <div id={styles.container}>
+      {showModal ? (
+        <div className={showAni ? styles.open : styles.close} id={styles.modal}>
+          <button onClick={handleFunction}>{showAni ? "Close" : "Open"}</button>
+          {children}
         </div>
-      )}
+      ) : null}
     </div>
   );
 }
